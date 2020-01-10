@@ -306,6 +306,16 @@ nnoremap <S-F8> :nohlsearch<CR><CR>
 "}
 
 
+" 将外部命令 wmctrl 控制窗口最大化的命令行参数封装成一个 vim 的函数
+fun! ToggleFullscreen()
+	call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
+endf
+" 全屏开/关快捷键
+map <silent> <F11> :call ToggleFullscreen()<CR>
+"" 启动 vim 时自动全屏
+"autocmd VimEnter * call ToggleFullscreen()
+
+
 "rainbow	{
 
 "}
@@ -350,6 +360,40 @@ nmap ga <Plug>(EasyAlign)
 "]c	git的上一修改点
 "}
 
+
+" 精准替换
+" 替换函数。参数说明：
+" confirm：是否替换前逐一确认
+" wholeword：是否整词匹配
+" replace：被替换字符串
+function! Replace(confirm, wholeword, replace)
+    wa
+    let flag = ''
+    if a:confirm
+        let flag .= 'gec'
+    else
+        let flag .= 'ge'
+    endif
+    let search = ''
+    if a:wholeword
+        let search .= '\<' . escape(expand('<cword>'), '/\.*$^~[') . '\>'
+    else
+        let search .= expand('<cword>')
+    endif
+    let replace = escape(a:replace, '/\&~')
+    execute 'argdo %s/' . search . '/' . replace . '/' . flag . '| update'
+endfunction
+" 不确认、非整词
+nnoremap <Leader>R :call Replace(0, 0, input('Replace '.expand('<cword>').' with: '))<CR>
+" 不确认、整词
+nnoremap <Leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+" 确认、非整词
+nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' with: '))<CR>
+" 确认、整词
+nnoremap <Leader>rcw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -364,20 +408,34 @@ nnoremap <silent> zk O<ESC>j
 
 
 " TabLine Tab configure KeyFire
-nnoremap <leader>tn :tabnew<CR>
-nnoremap <leader>tj :tabnext<CR>
-nnoremap <leader>tk :tabprevious<CR>
-nnoremap <leader>tc :tabclose<CR>
+"nnoremap <leader>tn :tabnew<CR>
+"nnoremap <leader>tj :tabnext<CR>
+"nnoremap <leader>tk :tabprevious<CR>
+"nnoremap <leader>tc :tabclose<CR>
 
 
 "copy paste
-noremap <C-c>  :"+y
-nnoremap <C-v> <ESC>"+gpa
-cnoremap <C-v> <C-R>+
+"noremap <C-c>  "+y
+"nnoremap <C-v> <ESC>"+gpa
+"cnoremap <C-v> <C-R>+
+
+" 设置快捷键将选中文本块复制至系统剪贴板
+vnoremap <Leader>y "+y
+" 设置快捷键将系统剪贴板内容粘贴至vim
+nmap <Leader>p "+p
+
+" 定义快捷键关闭当前分割窗口
+nmap <Leader>q :q<CR>
+" 定义快捷键保存当前窗口内容
+nmap <Leader>w :w<CR>
+" 定义快捷键保存所有窗口内容并退出 vim
+nmap <Leader>WQ :wa<CR>:q<CR>
+" 不做任何保存，直接退出 vim
+nmap <Leader>Q :qa!<CR>
 
 "save quit
-inoremap <C-s> : w<cr>
-nnoremap <C-s> : w<cr>
+"inoremap <C-s> : w<cr>
+"nnoremap <C-s> : w<cr>
 
 
 
@@ -408,6 +466,8 @@ nnoremap <leader>- :sp<CR>
 " *				--向后搜索当前光标所在字符
 " ?				--向前搜索
 " /				--向后搜索
+
+" %				--结对符志坚跳转
 
 
 
