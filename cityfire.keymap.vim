@@ -58,11 +58,17 @@ map <leader>ag :Ag
 "ctrl + x 在当前窗口水平分屏打开文件
 "ctrl + t 在tab中打开
 "--------------------------------------------------------------------
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-map <leader>f :CtrlPMRU<CR>
+"let g:ctrlp_map = '<leader>p'
+"let g:ctrlp_cmd = 'CtrlP'
+"map <leader>f :CtrlPMRU<CR>
 "--------------------------------------------------------------------
 "}
+
+"fzf快捷键 {
+map <leader>p :Files<CR>
+map <leader>b :Buffers<CR>
+"}
+
 
 
 "ctrlp-funky快捷键 {
@@ -108,11 +114,11 @@ map <Leader>a :A<Cr>
 
 "YouCompleteMe		{
 "--------------------------------------------------------------------
-nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
+"nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "insert 模式不想匹配，不知道什么快捷键
-inoremap <leader>; <C-x><C-o>
+"inoremap <leader>; <C-x><C-o>
 "--------------------------------------------------------------------
 "}
 
@@ -135,12 +141,12 @@ inoremap <leader>; <C-x><C-o>
 "vim-clang-format	{
 "--------------------------------------------------------------------
 " map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+"autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+"autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 " if you install vim-operator-user
 "autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting Toggle:
-nmap <Leader>ct :ClangFormatAutoToggle<CR>
+"nmap <Leader>ct :ClangFormatAutoToggle<CR>
 "--------------------------------------------------------------------
 "}
 
@@ -197,12 +203,11 @@ nnoremap <leader>bp :bprev<cr>
 "--------------------------------------------------------------------
 "}
 
-"mundo			{
+"undotree			{
 "j/k  - move between undo states
 "p/P - show the diff between your current / replay the diff
 "--------------------------------------------------------------------
-"map <leader>mu ::MundoToggle<CR>
-nnoremap <leader>ut :UndotreeToggle<cr>
+nnoremap <F5> :UndotreeToggle<cr>
 "--------------------------------------------------------------------
 
 
@@ -276,7 +281,7 @@ map J <Plug>(expand_region_shrink)
 "syntastic	{
 "开启检查
 "--------------------------------------------------------------------
-nnoremap <Leader>sy :SyntasticToggleMode<CR>
+"nnoremap <Leader>sy :SyntasticToggleMode<CR>
 "--------------------------------------------------------------------
 "}
 

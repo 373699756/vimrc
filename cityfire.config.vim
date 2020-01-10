@@ -69,7 +69,7 @@ set report=0       " Always report changed lines
 set linespace=0    " No extra spaces between rows
 set pumheight=20   " Avoid the pop up menu occupying the whole screen
 highlight clear SignColumn  " SignColumn should match background
-background color in relative mode
+"background color in relative mode
 set clipboard+=unnamed
 
 set t_ut=
@@ -90,8 +90,8 @@ set wildignore+=*/tmp/*,*.o,*.obj,*.so     " Unix
 " In the quickfix window, <CR> is used to jump to the error under the
 " cursor, so undefine the mapping there.
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
-let &cpo = s:save_cpo
-unlet s:save_cpo
+"let &cpo = s:save_cpo
+"unlet s:save_cpo
 "------------------------------------------------------------------------------------------------------
 
 
@@ -149,37 +149,7 @@ unlet s:save_cpo
 "autocmd! User GoyoLeave call <SID>goyo_leave()
 "}
 
-"ctrlp		{                " 搜索比grep 快多
-let g:ctrlp_working_path_mode = 'ra'	" search for nearest ancestor like .git, .hg, and the directory of the current file
-let g:ctrlp_match_window_bottom = 1		" show the match window at the top of the screen
-let g:ctrlp_by_filename = 1
-let g:ctrlp_max_height = 10				" maxiumum height of match window
-let g:ctrlp_switch_buffer = 'et'		" jump to a file if it's open already
-let g:ctrlp_use_caching = 1				" enable caching
-let g:ctrlp_clear_cache_on_exit=0  		" speed up by not removing clearing cache evertime
-let g:ctrlp_mruf_max = 250 				" number of recently opened files
-let g:ctrlp_regexp = 1
-set wildignore=*/tmp/*,*.so,*.swp,*.zip,*.git,.git,*.svn,.svn
-let g:ctrlp_custom_ignore = {
-                \   'dir':  '\v[\/]\.(git|hg|svn|build)$',
-                \   'file': '\v\.(exe|so|dll)$',
-                \   'link': 'SOME_BAD_SYMBOLIC_LINKS',
-                \ }
 
-" If ag available, use it to replace grep
-if executable('ag')
-        " Use Ag over Grep
-        set grepprg=ag\ --nogroup\ --color
-        " Use ag in CtrlP for listing files.
-        let g:ctrlp_user_command = 'ag %s -l --color -g ""'
-        " Ag is fast enough that CtrlP doesn't need to cache
-        let g:ctrlp_use_caching = 0
-else
-        let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-endif
-
-let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux"
-"}
 
 
 
@@ -223,27 +193,26 @@ let g:ctrlsf_ackprg = 'ag'   "设置ctrlsf 使用ag
  "(5)./install.sh --clang-completer
 "let g:ycm_global_ycm_extra_conf = fnamemodify(expand('<sfile>'), ':h') . '/global_conf.py'
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 " ycm_path_to_python_interpreter is important!
 
-let g:ycm_min_num_of_chars_for_completion=2
-let g:ycm_cache_omnifunc=0
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_complete_in_comments=1
-let g:ycm_complete_in_strings=1
-let g:ycm_semantic_triggers =  {
-            \   'c' : ['->', '.'],
-            \   'cpp' : ['->', '.', '::'],
-            \ }
-let g:ycm_filetype_blacklist={
-            \   'tagbar' : 1,
-            \   'nerdtree' : 1,
-            \	'mundo': 1,
-            \   'unite' : 1,
-            \   'text' : 1,
-            \ 	'ctrlp' : 1,
-            \}
-
+"let g:ycm_min_num_of_chars_for_completion=2
+"let g:ycm_cache_omnifunc=0
+"let g:ycm_seed_identifiers_with_syntax=1
+"let g:ycm_complete_in_comments=1
+"let g:ycm_complete_in_strings=1
+"let g:ycm_semantic_triggers =  {
+"            \   'c' : ['->', '.'],
+"            \   'cpp' : ['->', '.', '::'],
+"            \ }
+"let g:ycm_filetype_blacklist={
+"            \   'tagbar' : 1,
+"            \   'nerdtree' : 1,
+"            \	'mundo': 1,
+"            \   'unite' : 1,
+"            \   'text' : 1,
+"            \ 	'ctrlp' : 1,
+"            \}
 
 "}
 
@@ -259,11 +228,11 @@ let g:ycm_filetype_blacklist={
 "}
 
 "vim-clang-format	{
-let g:clang_format#style_options = {
-            \ "AccessModifierOffset" : -4,
-            \ "AllowShortIfStatementsOnASingleLine" : "true",
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11"}
+"let g:clang_format#style_options = {
+           "\ "AccessModifierOffset" : -4,
+            "\ "AllowShortIfStatementsOnASingleLine" : "true",
+            "\ "AlwaysBreakTemplateDeclarations" : "true",
+            "\ "Standard" : "C++11"}
 
 "}
 
@@ -438,13 +407,9 @@ let g:tagbar_compact=1
 "}
 
 
-"mundo 		{                " 回退历史
+"undotree 		{                " 回退历史
 set undofile
-set undodir=~/.vim/undo
-let g:mundo_width = 30
-let g:mundo_preview_height = 40
-let g:mundo_preview_bottom=1
-let g:mundo_right = 1
+set undodir=~/.vim/undodir/
 "}
 
 
@@ -518,14 +483,14 @@ let g:multi_cursor_use_default_mapping=0
 
 
 "syntastic	{
-let g:syntastic_c_checkers          = ['c', 'h']
-let g:syntastic_cpp_checkers        = ['cpp', 'hpp', 'inl']
-let g:syntastic_error_symbol='✴'
-let g:syntastic_warning_symbol = '!'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
-let g:syntastic_check_on_wq              = 0
+"let g:syntastic_c_checkers          = ['c', 'h']
+"let g:syntastic_cpp_checkers        = ['cpp', 'hpp', 'inl']
+"let g:syntastic_error_symbol='✴'
+"let g:syntastic_warning_symbol = '!'
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list            = 1
+"let g:syntastic_check_on_open            = 1
+"let g:syntastic_check_on_wq              = 0
 "}
 
 
@@ -578,12 +543,12 @@ au Syntax * RainbowParenthesesLoadChevrons	" <>
 
 "quickrun 	{
 "这个是编写脚本是时， .py/ .rb/*.sh, 直接运行，不用再执行
-let g:quickrun_config = {
-			\   "_" : {
-			\       "outputter" : "message",
-			\   },
-			\}
-let g:quickrun_no_default_key_mappings = 1
+"let g:quickrun_config = {
+			"\   "_" : {
+			"\       "outputter" : "message",
+			"\   },
+			"\}
+"let g:quickrun_no_default_key_mappings = 1
 "}
 
 

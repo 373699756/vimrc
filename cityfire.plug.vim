@@ -10,7 +10,10 @@
 " ------------------------------------------------------------------------------------------------------
 scriptencoding utf-8
 
+
 let mapleader="\<Space>"			"space 作为leader键
+
+"curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
 
 "vim风格颜色及默认配置
@@ -22,7 +25,9 @@ Plug 'liuchengxu/eleline.vim'			" vim状态栏
 
 " 搜索
 Plug 'rking/ag.vim'	             			" 搜索比grep 快多
-Plug 'ctrlpvim/ctrlp.vim'           			" 搜索文件名 可模糊匹配
+"Plug 'ctrlpvim/ctrlp.vim'           			" 搜索文件名 可模糊匹配
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'tacahiroy/ctrlp-funky'        			" 当前文件函数搜索
 Plug 'dyng/ctrlsf.vim'              			" 工程中搜索
 Plug 'haya14busa/incsearch.vim'				" /？直接搜索
@@ -30,8 +35,8 @@ Plug 'vim-scripts/a.vim'
 
 
 " C++编辑的控件
-Plug 'Valloric/YouCompleteMe'					" 自动补全
-Plug 'jeaye/color_coded'					" C++语法高亮
+"Plug 'Valloric/YouCompleteMe'					" 自动补全
+"Plug 'jeaye/color_coded'					" C++语法高亮
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}		" 能生成color_coded和.ycm_extra_conf.py
 Plug 'rhysd/vim-clang-format'					" C++的语言格式，编码的空格设置
 Plug 'vim-scripts/DoxygenToolkit.vim'           		" 注释工具,模板
@@ -40,6 +45,8 @@ Plug 'scrooloose/nerdcommenter'     				" 注释用的插件
 Plug 'bronson/vim-trailing-whitespace'  			" 快速去行尾空格 [, + <Space>]
 Plug 'jeffkreeftmeijer/vim-numbertoggle'            " normal 模式下相对行号，insert模式下绝对行号
 
+" Json编辑的控件
+Plug 'elzr/vim-json'
 
 " 工程界面
 Plug 'scrooloose/nerdtree'	         	" 目录结果
@@ -59,7 +66,7 @@ Plug 'terryma/vim-smooth-scroll'        " 页面平滑滚动
 Plug 'terryma/vim-expand-region'        " 区域快速选择
 Plug 'Raimondi/delimitMate'    	 	" 自动补全单引号，双引号等
 Plug 'itchyny/vim-cursorword'		" 相同字符下划线
-Plug 'vim-syntastic/syntastic'		" 语法分析
+"Plug 'vim-syntastic/syntastic'		" 语法分析
 "Plug 'vim-scripts/Mark'                         	" 高亮选中的单词
 Plug 'kien/rainbow_parentheses.vim'		" 括号高亮匹配
 Plug 'tpope/vim-abolish'		" 替换 编译多个相同的字符串
@@ -70,8 +77,10 @@ Plug 'matze/vim-move'			" 选中之后整体移动
 
 
 
-Plug 'thinca/vim-quickrun'                  " 快速执行当前文件
-Plug 'elzr/vim-json'
+"Plug 'thinca/vim-quickrun'                  " 快速执行当前文件
+
+
+
 " git版本控制
 Plug 'airblade/vim-gitgutter'
 

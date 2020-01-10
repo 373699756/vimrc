@@ -4,9 +4,9 @@
 " @ Source
 " 用法：cp ./vimrc ~/.vimrc 即可
 " - Plug
-source $HOME/cityfire/cityfire.plug.vim
+source $HOME/samba/vimrc/cityfire.plug.vim
 " - config
-source $HOME/cityfire/cityfire.config.vim
+source $HOME/samba/vimrc/cityfire.config.vim
 " - KeyMapping
-source $HOME/cityfire/cityfire.keymap.vim
+source $HOME/samba/vimrc/cityfire.keymap.vim
 
